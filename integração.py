@@ -1,3 +1,4 @@
+import streamlit as st
 import mysql.connector
 import pandas as pd
 
@@ -20,17 +21,20 @@ def conectar_bd():
 def inserir_dados(conexao, dados, tabela):
     try:
         cursor = conexao.cursor()
+        colunas = ', '.join(dados.columns)
         for indice, linha in dados.iterrows():
             valores = tuple(linha)
-            consulta = f"INSERT INTO {tabela} VALUES {valores}"
-            cursor.execute(consulta)
+            consulta = f"INSERT INTO {tabela} ({colunas}) VALUES ({', '.join(['%s'] * len(linha))})"
+            cursor.execute(consulta, valores)
         conexao.commit()
         print("Dados inseridos com sucesso na tabela", tabela)
     except mysql.connector.Error as erro:
-        print("Erro ao inserir dados no banco de dados MySQL:", erro)
+        print("Erro ao inserir dados no banco de dados MySQL:", erro) 
 
 # Leitura do arquivo CSV
-df = pd.read_csv("caminho/do/seu/arquivo.csv")
+# Leitura do arquivo CSV incluindo apenas as colunas desejadas
+colunas_desejadas = ['id', 'name', 'tags', 'nutrition', 'ingredients', 'n_ingredients']
+df = pd.read_csv("C:/Users/lucas/OneDrive/Área de Trabalho/-/Iaad/Cozzinhe/Cozzinhe_Data.csv", usecols=colunas_desejadas)
 
 # Seleção aleatória de 20 linhas
 dados_aleatorios = df.sample(n=20)
@@ -41,4 +45,8 @@ conexao = conectar_bd()
 # Verifica se a conexão foi bem-sucedida
 if conexao:
     # Chamada da função para inserir dados no banco de dados
-    inserir_dados(conexao, dados_aleatorios, "nome_da_tabela")
+    inserir_dados(conexao, dados_aleatorios, "cozzinhe_import")
+
+    # Exibição dos dados na interface web em Streamlit
+    st.write("Dados inseridos na tabela:")
+    st.dataframe(dados_aleatorios)
