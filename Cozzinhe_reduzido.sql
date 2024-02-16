@@ -1,7 +1,7 @@
 CREATE TABLE Recipes (
     id_recipes INT PRIMARY KEY,         -- Chave primária para identificar exclusivamente cada receita
     nome VARCHAR(255),                  -- Nome da receita
-    tags VARCHAR(255),                  -- Tags associadas à receita
+    tags VARCHAR(2000),                  -- Tags associadas à receita
     descricao TEXT,                     -- Descrição da receita
     quantity VARCHAR(50)                -- Quantidade do ingrediente necessário para a receita
 );
