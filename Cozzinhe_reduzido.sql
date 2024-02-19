@@ -1,3 +1,5 @@
+CREATE SCHEMA Cozzinhe
+
 CREATE TABLE Recipes (
     id_recipes INT PRIMARY KEY,         -- Chave primária para identificar exclusivamente cada receita
     nome VARCHAR(255),                  -- Nome da receita
