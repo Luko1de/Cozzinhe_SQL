@@ -24,7 +24,11 @@ def adicionar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes
         conexao.commit()
         st.write('Receita adicionada com sucesso')
     except mysql.connector.Error as erro:
-        st.write("Erro ao adicionar receita no banco de dados MySQL:", erro)
+        if erro.errno == 1644:  # Verifica se o erro é específico para violação de unicidade
+            st.error('Não é permitido adicionar uma receita com o mesmo nome.')
+        else:
+            st.error(f"Erro ao adicionar receita no banco de dados MySQL: {erro}")
+
 
 def editar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes):
     try:
@@ -127,5 +131,4 @@ def tela_receitas():
                 visualizar_receita(conexao, id_recipes)
         else:
             st.warning('Por favor, insira o ID da receita que deseja visualizar')
-
 tela_receitas()

@@ -24,7 +24,11 @@ def adicionar_ingrediente(conexao, id_ingredients, nome):
         conexao.commit()
         st.write('Ingrediente adicionado com sucesso')
     except mysql.connector.Error as erro:
-        st.write("Erro ao adicionar ingrediente no banco de dados MySQL:", erro)
+        if erro.errno == 1644:  # Verifica se o erro é específico para violação de unicidade
+            st.error('Não é permitido adicionar um ingrediente com o mesmo nome.')
+        else:
+            st.error(f"Erro ao adicionar ingrediente no banco de dados MySQL: {erro}")
+
 
 def editar_ingrediente(conexao, id_ingredients, nome):
     try:
