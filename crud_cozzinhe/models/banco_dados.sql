@@ -23,8 +23,8 @@ CREATE TABLE RecipeIngredients (
     id_recipeingredients INT PRIMARY KEY,-- Chave primária para identificar exclusivamente cada entrada de ingrediente da receita
     id_recipes INT,                      -- Chave estrangeira referenciando a tabela de Recipes, indicando a qual receita o ingrediente pertence
     id_ingredients INT,                  -- Chave estrangeira referenciando a tabela de Ingredients, indicando qual ingrediente está sendo usado
-    FOREIGN KEY (id_recipes) REFERENCES Recipes(id_recipes),-- Restrição de chave estrangeira para garantir a integridade referencial
-    FOREIGN KEY (id_ingredients) REFERENCES Ingredients(id_ingredients)-- Restrição de chave estrangeira para garantir a integridade referencial
+    FOREIGN KEY (id_recipe) REFERENCES recipes(id_recipe) ON DELETE CASCADE,-- Restrição de chave estrangeira para garantir a integridade referencial
+    FOREIGN KEY (id_ingredients) REFERENCES Ingredients(id_ingredients) ON DELETE CASCADE-- Restrição de chave estrangeira para garantir a integridade referencial
 );
 
 CREATE TABLE cozzinhe_import (

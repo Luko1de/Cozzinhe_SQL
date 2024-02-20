@@ -44,12 +44,21 @@ def editar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes):
 def excluir_receita(conexao, id_recipes):
     try:
         cursor = conexao.cursor()
-        consulta = ("DELETE FROM recipes WHERE id_recipes = %s")
-        cursor.execute(consulta, (id_recipes,))
+
+        # Excluir todas as entradas relacionadas na tabela recipesingredients
+        consulta_delete_ri = ("DELETE FROM recipeingredients WHERE id_recipes = %s")
+        cursor.execute(consulta_delete_ri, (id_recipes,))
+
+        # Excluir a receita na tabela recipes
+        consulta_delete_recipe = ("DELETE FROM recipes WHERE id_recipes = %s")
+        cursor.execute(consulta_delete_recipe, (id_recipes,))
+
         conexao.commit()
         st.write('Receita excluída com sucesso')
     except mysql.connector.Error as erro:
         st.write("Erro ao excluir receita no banco de dados MySQL:", erro)
+
+
 def visualizar_receita(conexao, id_recipes):
     try:
         cursor = conexao.cursor()
