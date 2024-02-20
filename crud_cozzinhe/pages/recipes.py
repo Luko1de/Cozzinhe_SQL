@@ -15,6 +15,27 @@ def conectar_bd():
         st.write("Erro ao conectar ao banco de dados MySQL:", erro)
         return None
 
+def criar_trigger(conexao):
+    try:
+        cursor = conexao.cursor()
+        cursor.execute('''CREATE TRIGGER IF NOT EXISTS avoid_duplicate_ingredients
+                          BEFORE INSERT ON recipeingredientes
+                          FOR EACH ROW
+                          BEGIN
+                              DECLARE ingredient_count INT;
+                              SELECT COUNT(*) INTO ingredient_count
+                              FROM recipeingredientes
+                              WHERE recipe_id = NEW.recipe_id AND ingredient_id = NEW.ingredient_id;
+                              IF ingredient_count > 0 THEN
+                                  SIGNAL SQLSTATE '45000'
+                                  SET MESSAGE_TEXT = 'Não é permitido ingredientes duplicados na mesma receita';
+                              END IF;
+                          END;''')
+        conexao.commit()
+        st.write("Trigger criado com sucesso")
+    except mysql.connector.Error as erro:
+        st.write("Erro ao criar trigger no banco de dados MySQL:", erro)
+
 def adicionar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes):
     try:
         cursor = conexao.cursor()
@@ -127,4 +148,6 @@ def tela_receitas():
                 visualizar_receita(conexao, id_recipes)
         else:
             st.warning('Por favor, insira o ID da receita que deseja visualizar')
+
+criar_trigger(conexao)
 tela_receitas()
