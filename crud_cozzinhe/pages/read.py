@@ -36,7 +36,7 @@ def consulta_recipeingredients(connect):
     return data
 
 #Streamlit do READ
-st.title("Cozzinhe - Read")
+st.title(":book: Cozzinhe - Read")
 st.write("Aqui você pode visualizar as receitas e ingredientes cadastrados no banco de dados.")
 with st.expander("Receitas"):
     st.write("Escolha o que você quer consultar:")

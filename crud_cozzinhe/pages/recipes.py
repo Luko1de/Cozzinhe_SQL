@@ -66,9 +66,8 @@ def visualizar_receita(conexao, id_recipes):
         st.write("Erro ao visualizar receita no banco de dados MySQL:", erro)
 
 conexao = conectar_bd()
-
-if conexao:
-    # título com ícone de panela
+def tela_receitas():
+     # título com ícone de panela
     st.title(':fork_and_knife: Receitas')
     # selecionar ação CRUD - Adicionar
     selected = st.selectbox('Escolha uma ação', ['Adicionar', 'Editar', 'Excluir', 'Visualizar'])
@@ -128,3 +127,4 @@ if conexao:
                 visualizar_receita(conexao, id_recipes)
         else:
             st.warning('Por favor, insira o ID da receita que deseja visualizar')
+tela_receitas()

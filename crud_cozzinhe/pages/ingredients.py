@@ -65,7 +65,8 @@ def visualizar_ingrediente(conexao, id_ingredients):
 
 conexao = conectar_bd()
 
-if conexao:
+
+def tela_ingredients():
     st.title(':lemon: Ingredientes')
     selected = st.selectbox('Escolha uma ação', ['Adicionar', 'Editar', 'Excluir', 'Visualizar'])
 
@@ -106,3 +107,5 @@ if conexao:
                 visualizar_ingrediente(conexao, id_ingredients)
         else:
             st.warning('Por favor, insira o ID do ingrediente que deseja visualizar')
+if conexao:
+    tela_ingredients()
