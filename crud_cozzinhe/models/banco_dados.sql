@@ -27,7 +27,7 @@ CREATE TABLE cozzinhe_import (
     ingredients TEXT,
     n_ingredients INT
 );
-
+-- Trigger para evitar ingredientes duplicados
 CREATE TRIGGER evitar_ingredientes_duplicados 
 BEFORE INSERT ON recipeingredients 
 FOR EACH ROW
@@ -39,3 +39,17 @@ BEGIN
         SET MESSAGE_TEXT = 'Não é permitido adicionar um ingrediente duplicado na mesma receita.';
     END IF;
 END;
+
+-- Trigger para evitar receitas duplicadas
+CREATE TRIGGER evitar_receitas_duplicadas 
+BEFORE INSERT ON recipes 
+FOR EACH ROW
+BEGIN
+    DECLARE recipe_count INT;
+    SET recipe_count = (SELECT COUNT(*) FROM recipes WHERE nome = NEW.nome);
+    IF recipe_count > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Não é permitido adicionar uma receita com o mesmo nome.';
+    END IF;
+END;
+
