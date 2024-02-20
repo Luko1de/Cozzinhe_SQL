@@ -35,15 +35,21 @@ CREATE TABLE cozzinhe_import (
 
 -- Trigger para evitar ingredientes duplicados
 
-CREATE TRIGGER evitar_ingredientes_duplicados 
-BEFORE INSERT ON recipeingredients 
+CREATE TRIGGER evita_ingredientes_duplicados 
+BEFORE INSERT ON ingredients
 FOR EACH ROW
 BEGIN
     DECLARE ingredient_count INT;
-    SET ingredient_count = (SELECT COUNT(*) FROM recipeingredients WHERE recipe_id = NEW.recipe_id AND ingredient_id = NEW.ingredient_id);
+    
+    -- Verifica se o ingrediente já existe na tabela
+    SELECT COUNT(*) INTO ingredient_count 
+    FROM ingredients 
+    WHERE nome = NEW.nome;
+    
+    -- Se o ingrediente já existe, cancela a inserção
     IF ingredient_count > 0 THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Não é permitido adicionar um ingrediente duplicado na mesma receita.';
+        SET MESSAGE_TEXT = 'Ingrediente duplicado. A inserção foi cancelada.';
     END IF;
 END;
 
