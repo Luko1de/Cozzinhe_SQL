@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 
 # Configurações
 st.set_page_config(page_title='CoZZinhe', page_icon=':fork_and_knife:', layout='wide')
