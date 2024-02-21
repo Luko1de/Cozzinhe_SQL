@@ -145,4 +145,5 @@ def tela_receitas():
                 visualizar_receita(conexao, id_recipes)
         else:
             st.warning('Por favor, insira o ID da receita que deseja visualizar')
-tela_receitas()
+if conexao:
+    tela_receitas()
