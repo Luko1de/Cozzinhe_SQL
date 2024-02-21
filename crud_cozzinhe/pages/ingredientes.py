@@ -120,7 +120,7 @@ def tela_ingredients():
         if id_ingredients:
             id_ingredients = int(id_ingredients)
             if st.button('Visualizar'):
-                read(conexao, id_ingredients)
+                visualizar_ingrediente(conexao, id_ingredients)
         else:
             st.warning('Por favor, insira o ID do ingrediente que deseja visualizar')
 if conexao:
