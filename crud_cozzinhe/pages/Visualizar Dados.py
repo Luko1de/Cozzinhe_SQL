@@ -25,7 +25,7 @@ if view == "Recipes":
     conexao = connect_mysql(senha)
     cursor=conexao.cursor()
     cursor.execute(comando)
-    df = pd.DataFrame(cursor.fetchall(), columns=["id_recipes","nome","tags","descricao","quantity"])
+    df = pd.DataFrame(cursor.fetchall(), columns=["ID","Nome","Tags","Descrição","Quantidade de Ingredientes"])
     st.table(df)
 if view == "Ingredients":
     st.write("Aqui estão os ingredientes cadastrados no banco de dados:")
@@ -33,7 +33,7 @@ if view == "Ingredients":
     conexao = connect_mysql(senha)
     cursor=conexao.cursor()
     cursor.execute(comando)
-    df = pd.DataFrame(cursor.fetchall(), columns=["id_ingredients","nome"])
+    df = pd.DataFrame(cursor.fetchall(), columns=["ID","Nome"])
     st.table(df)
 if view == "RecipeIngredients":
     st.write("Aqui estão os ingredientes das receitas cadastrados no banco de dados:")
@@ -41,5 +41,5 @@ if view == "RecipeIngredients":
     conexao = connect_mysql(senha)
     cursor=conexao.cursor()
     cursor.execute(comando)
-    df = pd.DataFrame(cursor.fetchall(), columns=["id_recipeingredients","id_ingredients","id_recipes"])
+    df = pd.DataFrame(cursor.fetchall(), columns=["ID Receita-Ingrediente","ID Receita","ID Ingredientes"])
     st.table(df)
