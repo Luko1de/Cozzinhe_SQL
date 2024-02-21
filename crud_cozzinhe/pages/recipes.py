@@ -6,9 +6,15 @@ from main import senha
 def conectar_bd(senha):
     try:
         conexao = mysql.connector.connect(
+<<<<<<< HEAD
             host="localhost",
             user="root",
             password=senha,
+=======
+            host="localhost", #Trocar o host para a sua
+            user="root", #Trocar o user para o seu, ou pode deixar o root
+            password="123456", #Trocar a senha para a sua
+>>>>>>> f5d743c4f4162368cb8e8e71ff9f4489316f0dbd
             database="Cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
