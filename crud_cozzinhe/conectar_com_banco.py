@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import mysql.connector
 import streamlit as st
 conexao = mysql.connector.connect(
@@ -7,3 +8,14 @@ conexao = mysql.connector.connect(
             database="Cozzinhe"
         )
 cursor = conexao.cursor()
+=======
+import mysql.connector
+import streamlit as st
+conexao = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="123456",
+            database="Cozzinhe"
+        )
+cursor = conexao.cursor()
+>>>>>>> b2c19ff92db8278fe1315eaafbbe96d5be4f6ba2

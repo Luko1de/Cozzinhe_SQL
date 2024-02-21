@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 
 # informe a senha do seu mysql
 senha = "123"
