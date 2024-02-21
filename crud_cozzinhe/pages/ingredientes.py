@@ -76,6 +76,7 @@ def visualizar_ingrediente(conexao, id_ingredients):
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar ingrediente no banco de dados MySQL:", erro)
 
+
 conexao = conectar_bd(senha)
 
 
@@ -120,7 +121,7 @@ def tela_ingredients():
         if id_ingredients:
             id_ingredients = int(id_ingredients)
             if st.button('Visualizar'):
-                visualizar_ingrediente(conexao, id_ingredients)
+                read(conexao, id_ingredients)
         else:
             st.warning('Por favor, insira o ID do ingrediente que deseja visualizar')
 if conexao:
