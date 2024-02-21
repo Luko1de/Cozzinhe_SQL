@@ -16,10 +16,10 @@ def connect_mysql(senha):
 #Streamlit do READ
 st.title(":book: Cozzinhe - Consultas")
 st.write("Aqui você pode visualizar as receitas e ingredientes cadastrados no banco de dados.")
-
-st.write("Escolha o que você quer consultar:")
-view = st.selectbox("Escolha a tabela que deseja visualizar:", ["Recipes","Ingredients","RecipeIngredients"])
-if view == "Recipes":
+st.divider()
+st.subheader("Escolha o que você quer consultar:")
+view = st.selectbox("Escolha a tabela que deseja visualizar:", ["Receitas","Ingredientes","Ingredientes de cada Receita"])
+if view == "Receitas":
     st.write("Aqui estão as receitas cadastradas no banco de dados:")
     comando = "SELECT * FROM recipes"
     conexao = connect_mysql(senha)
@@ -27,7 +27,7 @@ if view == "Recipes":
     cursor.execute(comando)
     df = pd.DataFrame(cursor.fetchall(), columns=["ID","Nome","Tags","Descrição","Quantidade de Ingredientes"])
     st.table(df)
-if view == "Ingredients":
+if view == "Ingredientes":
     st.write("Aqui estão os ingredientes cadastrados no banco de dados:")
     comando = "SELECT * FROM ingredients"
     conexao = connect_mysql(senha)
@@ -35,7 +35,7 @@ if view == "Ingredients":
     cursor.execute(comando)
     df = pd.DataFrame(cursor.fetchall(), columns=["ID","Nome"])
     st.table(df)
-if view == "RecipeIngredients":
+if view == "Ingredientes de cada Receita":
     st.write("Aqui estão os ingredientes das receitas cadastrados no banco de dados:")
     comando = ("SELECT Recipes.nome AS Nome_Receita, Ingredients.nome AS Nome_Ingrediente "
                     "FROM RecipeIngredients "
