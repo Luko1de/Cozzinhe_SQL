@@ -3,9 +3,9 @@ import mysql.connector
 
 # Função para conectar ao banco de dados MySQL
 connect = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="123456",
+            host="localhost", #Trocar o host para a sua
+            user="root", #Trocar o user para o seu, ou pode deixar o root
+            password="123456", #Trocar a senha para a sua
             database="Cozzinhe"
         )
     
