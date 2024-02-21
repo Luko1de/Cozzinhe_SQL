@@ -1,14 +1,12 @@
 import streamlit as st
-import mysql.connector
-# importando variavel senha da main
-from main import senha
+import mysql.connector  # Importe o módulo MySQL Connector
 
-def conectar_bd(senha):
+def conectar_bd():
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="root",
-            password=senha,
+            password="123456",
             database="Cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
@@ -80,7 +78,7 @@ def visualizar_receita(conexao, id_recipes):
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar receita no banco de dados MySQL:", erro)
 
-conexao = conectar_bd(senha)
+conexao = conectar_bd()
 def tela_receitas():
      # título com ícone de panela
     st.title(':fork_and_knife: Receitas')
@@ -92,14 +90,11 @@ def tela_receitas():
     if selected == 'Adicionar':
         # formulário para adicionar receita
         st.subheader('Adicionar receita')
-        col1, buff, col2 = st.columns([2,1,2])
-        with col1:
-            id_recipes = st.text_input('ID da receita')
-            tags = st.text_input('Tags')
-        with col2:
-            nome = st.text_input('Nome da receita')
-            n_ingredientes = st.number_input('Número de ingredientes', min_value=1, max_value=100)
+        id_recipes = st.text_input('ID da receita')
+        nome = st.text_input('Nome da receita')
+        tags = st.text_input('Tags')
         descricao = st.text_area('Descrição')
+        n_ingredientes = st.number_input('Número de ingredientes', min_value=1, max_value=100)
         # botão para adicionar receita
         if st.button('Adicionar'):
             adicionar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes)
@@ -145,5 +140,4 @@ def tela_receitas():
                 visualizar_receita(conexao, id_recipes)
         else:
             st.warning('Por favor, insira o ID da receita que deseja visualizar')
-if conexao:
-    tela_receitas()
+tela_receitas()
