@@ -1,13 +1,14 @@
 import streamlit as st
 import mysql.connector
+from main import senha
 
 # Função para conectar ao banco de dados MySQL
-def conectar_bd():
+def conectar_bd(senha):
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="123456",
+            password=senha,
             database="cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
@@ -35,7 +36,7 @@ def consultar_ingredientes_por_receita(conexao, id_receita):
 st.title("Consulta de Ingredientes por Receita")
 id_receita = st.text_input("Insira o ID da receita:")
 if st.button("Consultar"):
-    conexao = conectar_bd()
+    conexao = conectar_bd(senha)
     if conexao:
         ingredientes = consultar_ingredientes_por_receita(conexao, id_receita)
         if ingredientes:

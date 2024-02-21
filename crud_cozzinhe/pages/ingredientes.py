@@ -1,12 +1,13 @@
 import streamlit as st
 import mysql.connector
-
-def conectar_bd():
+import pandas as pd
+from main import senha
+def conectar_bd(senha):
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="123456",
+            password=senha,
             database="Cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
@@ -75,7 +76,7 @@ def visualizar_ingrediente(conexao, id_ingredients):
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar ingrediente no banco de dados MySQL:", erro)
 
-conexao = conectar_bd()
+conexao = conectar_bd(senha)
 
 
 def tela_ingredients():
@@ -84,8 +85,11 @@ def tela_ingredients():
 
     if selected == 'Adicionar':
         st.subheader('Adicionar ingrediente')
-        id_ingredients = st.text_input('ID do ingrediente')
-        nome = st.text_input('Nome do ingrediente')
+        col1, buff, col2 = st.columns([2,1,2])
+        with col1:
+            id_ingredients = st.text_input('ID do ingrediente')
+        with col2:
+            nome = st.text_input('Nome do ingrediente')
         if st.button('Adicionar'):
             adicionar_ingrediente(conexao, id_ingredients, nome)
 
