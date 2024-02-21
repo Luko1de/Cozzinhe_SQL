@@ -9,7 +9,6 @@ def conectar_bd(senha):
             password=senha,
             database="Cozzinhe"
         )
-        st.write("Conexão bem-sucedida ao banco de dados MySQL")
         return conexao
     except mysql.connector.Error as erro:
         st.write("Erro ao conectar ao banco de dados MySQL:", erro)

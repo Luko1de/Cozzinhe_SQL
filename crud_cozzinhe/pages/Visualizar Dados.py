@@ -37,9 +37,12 @@ if view == "Ingredients":
     st.table(df)
 if view == "RecipeIngredients":
     st.write("Aqui estão os ingredientes das receitas cadastrados no banco de dados:")
-    comando = "SELECT * FROM recipeingredients"
+    comando = ("SELECT Recipes.nome AS Nome_Receita, Ingredients.nome AS Nome_Ingrediente "
+                    "FROM RecipeIngredients "
+                    "JOIN Recipes ON RecipeIngredients.id_recipes = Recipes.id_recipes "
+                    "JOIN Ingredients ON RecipeIngredients.id_ingredients = Ingredients.id_ingredients")
     conexao = connect_mysql(senha)
     cursor=conexao.cursor()
     cursor.execute(comando)
-    df = pd.DataFrame(cursor.fetchall(), columns=["ID Receita-Ingrediente","ID Receita","ID Ingredientes"])
+    df = pd.DataFrame(cursor.fetchall(), columns=["Receita","Ingrediente"])
     st.table(df)
