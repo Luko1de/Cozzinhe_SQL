@@ -7,7 +7,7 @@ CREATE TABLE Recipes (
     nome VARCHAR(255),                  -- Nome da receita
     tags VARCHAR(10000),                  -- Tags associadas à receita
     descricao TEXT,                     -- Descrição da receita
-    quantity VARCHAR(50)                -- Quantidade do ingrediente necessário para a receita
+    quantity INT              -- Quantidade do ingrediente necessário para a receita
 );
 
 -- Tabela para armazenar os ingredientes
