@@ -1,30 +1,14 @@
 import streamlit as st
 import mysql.connector
-<<<<<<< HEAD
 from main import senha
 
 # Função para conectar ao banco de dados MySQL
 connect = mysql.connector.connect(
-<<<<<<< HEAD
             host="127.0.0.1",
             user="root",
             password=senha,
-=======
-            host="localhost", #Trocar o host para a sua
-            user="root", #Trocar o user para o seu, ou pode deixar o root
-            password="123456", #Trocar a senha para a sua
->>>>>>> f5d743c4f4162368cb8e8e71ff9f4489316f0dbd
-=======
-import pandas as pd
-
-# Função para conectar ao banco de dados MySQL
-connect = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password="123456",
->>>>>>> b2c19ff92db8278fe1315eaafbbe96d5be4f6ba2
             database="Cozzinhe"
-        )
+)
     
 cursor = connect.cursor()
 
