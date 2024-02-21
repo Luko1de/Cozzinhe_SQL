@@ -1,5 +1,6 @@
 import streamlit as st
 import mysql.connector
+import pandas as pd
 from main import senha
 
 def conectar_bd(senha):
@@ -75,6 +76,17 @@ def visualizar_ingrediente(conexao, id_ingredients):
             st.warning('Nenhum ingrediente encontrado com o ID fornecido')
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar ingrediente no banco de dados MySQL:", erro)
+
+def read_ingredientes(conexao):
+    try:
+        cursor = conexao.cursor()
+        consulta = (f"SELECT * FROM ingredients")
+        conexao.cursor.execute(consulta)
+        ingredientes = pd.DataFrame(conexao.cursor.fetchall(), columns =('ID Ingrediente','Nome do Ingrediente'))
+        st.table(ingredientes)
+    except mysql.connector.Error as erro:
+        st.write("Erro ao consultar ingredientes no banco de dados MySQL:", erro)
+
 
 conexao = conectar_bd(senha)
 
