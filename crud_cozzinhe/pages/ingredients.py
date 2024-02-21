@@ -1,12 +1,13 @@
 import streamlit as st
 import mysql.connector
+from main import senha
 
-def conectar_bd():
+def conectar_bd(senha):
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="123456",
+            password="4246",
             database="Cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
@@ -75,7 +76,7 @@ def visualizar_ingrediente(conexao, id_ingredients):
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar ingrediente no banco de dados MySQL:", erro)
 
-conexao = conectar_bd()
+conexao = conectar_bd(senha)
 
 
 def tela_ingredients():

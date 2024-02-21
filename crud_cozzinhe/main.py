@@ -1,6 +1,8 @@
 import streamlit as st
 from PIL import Image
 
+# informe a senha do seu mysql
+senha = "123"
 # Configurações
 st.set_page_config(page_title='CoZZinhe', page_icon=':fork_and_knife:', layout='wide')
 

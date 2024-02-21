@@ -1,11 +1,12 @@
 import streamlit as st
 import mysql.connector
+from main import senha
 
 # Função para conectar ao banco de dados MySQL
 connect = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
-            password="123456",
+            password=senha,
             database="Cozzinhe"
         )
     

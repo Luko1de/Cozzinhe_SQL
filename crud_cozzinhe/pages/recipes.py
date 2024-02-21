@@ -1,12 +1,14 @@
 import streamlit as st
-import mysql.connector  # Importe o módulo MySQL Connector
+import mysql.connector
+# importando variavel senha da main
+from main import senha
 
-def conectar_bd():
+def conectar_bd(senha):
     try:
         conexao = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="123456",
+            password=senha,
             database="Cozzinhe"
         )
         st.write("Conexão bem-sucedida ao banco de dados MySQL")
@@ -78,7 +80,7 @@ def visualizar_receita(conexao, id_recipes):
     except mysql.connector.Error as erro:
         st.write("Erro ao visualizar receita no banco de dados MySQL:", erro)
 
-conexao = conectar_bd()
+conexao = conectar_bd(senha)
 def tela_receitas():
      # título com ícone de panela
     st.title(':fork_and_knife: Receitas')
