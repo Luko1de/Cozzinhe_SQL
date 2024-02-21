@@ -66,3 +66,17 @@ END;
 //
 DELIMITER ;
 
+-- Trigger
+DELIMITER //
+
+CREATE TRIGGER atualizacao_quantidade
+AFTER DELETE ON ingredients
+FOR EACH ROW
+BEGIN
+    DELETE FROM recipeingredients WHERE id_ingredients = OLD.id_ingredients;
+    UPDATE recipes 
+    SET quantity = quantity - 1
+    WHERE id_recipes IN (SELECT id_recipes FROM recipeingredients WHERE id_ingredients = OLD.id_ingredients);
+END//
+
+DELIMITER ;
