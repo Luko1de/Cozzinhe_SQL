@@ -1,9 +1,10 @@
 import streamlit as st
 
 # informe a senha do seu mysql
-senha = "123"
+senha = "4246"
+
 # Configurações
-st.set_page_config(page_title='CoZZinhe', page_icon=':fork_and_knife:', layout='wide')
+st.set_page_config(page_title='CoZZinhe', page_icon=':fork_and_knife:', layout='centered')
 
 # Estilo CSS para personalização
 st.markdown(
@@ -44,6 +45,4 @@ O CoZZinhe é um projeto desenvolvido para gerenciar receitas e ingredientes de 
 Você pode adicionar, editar, excluir e visualizar receitas, bem como gerenciar ingredientes usados nessas receitas.
 Aproveite para explorar as funcionalidades disponíveis!
 """)
-
-# Logo
 

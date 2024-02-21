@@ -92,11 +92,14 @@ def tela_receitas():
     if selected == 'Adicionar':
         # formulário para adicionar receita
         st.subheader('Adicionar receita')
-        id_recipes = st.text_input('ID da receita')
-        nome = st.text_input('Nome da receita')
-        tags = st.text_input('Tags')
+        col1, buff, col2 = st.columns([2,1,2])
+        with col1:
+            id_recipes = st.text_input('ID da receita')
+            tags = st.text_input('Tags')
+        with col2:
+            nome = st.text_input('Nome da receita')
+            n_ingredientes = st.number_input('Número de ingredientes', min_value=1, max_value=100)
         descricao = st.text_area('Descrição')
-        n_ingredientes = st.number_input('Número de ingredientes', min_value=1, max_value=100)
         # botão para adicionar receita
         if st.button('Adicionar'):
             adicionar_receita(conexao, id_recipes, nome, tags, descricao, n_ingredientes)

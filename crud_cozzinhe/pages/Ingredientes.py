@@ -85,8 +85,11 @@ def tela_ingredients():
 
     if selected == 'Adicionar':
         st.subheader('Adicionar ingrediente')
-        id_ingredients = st.text_input('ID do ingrediente')
-        nome = st.text_input('Nome do ingrediente')
+        col1, buff, col2 = st.columns([2,1,2])
+        with col1:
+            id_ingredients = st.text_input('ID do ingrediente')
+        with col2:
+            nome = st.text_input('Nome do ingrediente')
         if st.button('Adicionar'):
             adicionar_ingrediente(conexao, id_ingredients, nome)
 
