@@ -84,6 +84,7 @@ def tela_receitas():
     # selecionar ação CRUD - Adicionar
     selected = st.selectbox('Escolha uma ação', ['Adicionar', 'Editar', 'Excluir', 'Visualizar'])
     show = st.checkbox('Mostrar receitas')
+    st.divider()
 
     # se ação for Adicionar
     if selected == 'Adicionar':

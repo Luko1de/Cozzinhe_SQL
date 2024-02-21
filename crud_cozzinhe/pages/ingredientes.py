@@ -82,6 +82,7 @@ conexao = conectar_bd(senha)
 def tela_ingredients():
     st.title(':lemon: Ingredientes')
     selected = st.selectbox('Escolha uma ação', ['Adicionar', 'Editar', 'Excluir', 'Visualizar'])
+    st.divider()
 
     if selected == 'Adicionar':
         st.subheader('Adicionar ingrediente')

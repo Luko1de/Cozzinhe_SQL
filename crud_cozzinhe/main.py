@@ -12,24 +12,19 @@ st.markdown(
     <style>
     .title {
         font-family: 'Arial Black', sans-serif;
-        font-size: 48px;
+        font-size: 100px;
         text-align: center;
         color: #FF5733;
         display: flex;
         align-items: center;
     }
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-    }
-    .logo {
-        max-width: 60%;
-    }
     .description {
         font-size: 24px;
         text-align: center;
+        color: #333333;
+    }
+    .big-font {
+        font-size: 36px;
         color: #333333;
     }
     </style>
@@ -44,5 +39,7 @@ st.write("""
 O CoZZinhe é um projeto desenvolvido para gerenciar receitas e ingredientes de forma fácil e organizada.
 Você pode adicionar, editar, excluir e visualizar receitas, bem como gerenciar ingredientes usados nessas receitas.
 Aproveite para explorar as funcionalidades disponíveis!
-""")
+""", format='markdown')
+st.divider()
+
 

@@ -11,7 +11,6 @@ def conectar_bd(senha):
             password=senha,
             database="cozzinhe"
         )
-        st.write("Conexão bem-sucedida ao banco de dados MySQL")
         return conexao
     except mysql.connector.Error as erro:
         st.write("Erro ao conectar ao banco de dados MySQL:", erro)
@@ -41,10 +40,11 @@ if st.button("Consultar"):
         ingredientes = consultar_ingredientes_por_receita(conexao, id_receita)
         if ingredientes:
             receita_atual = None
-            st.subheader("Ingredientes da Receita:")
             for receita, ingrediente in ingredientes:
                 if receita != receita_atual:
-                    st.write(f"Receita: {receita}")
+                    st.divider()
+                    st.subheader(receita)
+                    st.write("Ingredientes da receita:")
                     receita_atual = receita
                 st.write(f"- Ingrediente: {ingrediente}")
         else:
