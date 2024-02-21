@@ -1,20 +1,29 @@
-import streamlit as st 
+import conectar_com_banco as db
+import streamlit as st
+import pandas as pd
 import mysql.connector
 
+def adicionar_ingrediente(ingredient):
+    try:
+        cmd_cre = (f"""INSERT INTO ingredients (id_ingredients, nome)
+                        VALUES ('{ingredient.id_ingredients}', '{ingredient.nome}')""")
+        db.cursor.execute(cmd_cre)
+        db.conexao.commit()
+    except mysql.connector.integrityerror as err:
+        st.error("Erro ao inserir dados: ", err)
+    
+def ler_ingrediente():
+    cmd_read = (f"""SELECT * FROM ingredients""")
+    db.cursor.execute(cmd_read)
+    resultado = pd.DataFrame(db.cursor.fetchall(), columns=['id_ingredients', 'nome'])
+    st.table(resultado)
 
-def adicionar():
-    st.title('Adicionar Ingrediente')
-    id = st.text_input('ID do Ingrediente')
-    nome = st.text_input('Nome do Ingrediente')
+def atualizar_ingrediente(ingredient):
+    cmd_upd = (f"""UPDATE ingredients SET nome = '{ingredient.nome}' WHERE id_ingredients = '{ingredient.id_ingredients}'""")
+    db.cursor.execute(cmd_upd)
+    db.conexao.commit()
 
-    # conectando ao banco de dados e inserindo os dados
-    if st.button('Adicionar'):
-        conexao = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="123456",
-            database="Cozzinhe"
-            )
-        conexao.cursor().execute(f"INSERT INTO ingredientes (id, nome) VALUES ('{id}', '{nome}')")
-        conexao.commit()
-
+def deletar_ingrediente(ingredient):
+    cmd_del = (f"""DELETE FROM ingredients WHERE id_ingredients = '{ingredient.id_ingredients}'""")
+    db.cursor.execute(cmd_del)
+    db.conexao.commit()
